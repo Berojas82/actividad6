@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/style.css')}}">
+    
+    <div class="caja-mensaje">
+        <h2 class="text-center">Sala de chat: {{cod}}</h2>
+        <div class="mensajes" id="mensajes"></div>
+        
+        <div class="inputs">
+            <input type="text" rows="3" placeholder="Escribe tu mensaje" name="mensaje" id="mensaje"/>
+            <button type="button" name="enviar" id="env-btn" onClick="enviarMensaje()">
+                Enviar
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script type="text/javascript">
+    var socketio = io();
+
+    const mensajes = document.getElementById("mensajes");
+
+    const crearMensaje = (nombre, msg, fecha) => {
+        const content = `
+        <div class="text">
+            <span><strong>${nombre}</strong>: ${msg}</span>
+            <span class="muted">${fecha}</span>
+        </div>`;
+        
+        mensajes.innerHTML += content;
+    };
+
+    socketio.on("mensaje", (data) => {
+        console.log("Mensaje recibido:", data);
+        crearMensaje(data.first_name, data.mensaje, new Date().toLocaleString());
+    });
+
+    socketio.on("usuario_conectado", (data) => {
+        crearMensaje("Sistema", `${data.first_name} ha entrado a la sala`, new Date().toLocaleString());
+    });
+
+    socketio.on("usuario_desconectado", (data) => {
+        crearMensaje("Sistema", `${data.first_name} ha salido de la sala`, new Date().toLocaleString());
+    });
+
+    const enviarMensaje = () => {
+        const mensaje = document.getElementById("mensaje");
+        
+        if (mensaje.value.trim() === "") return; // Validación adicional
+        
+        const msgContent = mensaje.value;
+        console.log("Enviando mensaje:", msgContent);
+        
+        socketio.emit("mensaje", {data: msgContent});
+        
+        crearMensaje("Tú", msgContent, new Date().toLocaleString());
+        
+        mensaje.value = "";
+    };
+</script>
+
+{% for msg in mensajes %}
+<script type="text/javascript">
+    crearMensaje("{{msg.first_name}}", "{{msg.mensaje}}", "{{msg.fecha}}");
+</script>
+{% endfor %}
+{% endblock %}

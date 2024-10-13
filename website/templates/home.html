@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %} Home page {% endblock %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/homestyle.css')}}">
+
+</head>
+<body>
+    <h1 style="text-align: center;">¡Bienvenido a la mejor página del mundo mundial!</h1>
+    <p style="text-align: center;">
+        <div class="video-container">
+            <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/dNIWPso9ijA?autoplay=1"
+                allow="autoplay; encrypted-media" allowfullscreen>
+            ></iframe>
+        </div>
+    </p>
+</body>
+{% endblock %}

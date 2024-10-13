@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} Popcorn Page {% endblock %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/popstyle.css')}}">
+</head>
+
+<div class="container">
+    <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=dcu0zg-sG0M8kmLE&amp;list=PLVtuISWoa5BYlcMpA1K2nXRhWHpOmR7Rv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="content">
+        <h1>Popcorn Pop</h1>
+        <p>Playa, clubes nocturnos, Mar Negro, paseos en yate, temporada de verano son unos de los varios conceptos con los que se puede asociar este ritmo traído de las lejanas tierras rumanas, dando aviso que la era de hermetismo de la Europa Oriental es cosa del pasado y una nueva época se veía venir luego de su ingreso en la Unión Europea en el 2007.</p>
+        <p>Este tipo de música se destaca por el uso de ritmos del género house y trance, así como de tempo rápido, es decir, de 168-200 pulsaciones por minuto. Los ritmos son fáciles de reconocer dado el uso de sintetizadores y patrones rítmicos similares.</p>
+        <p>Los mayores exponentes de este ritmo son Inna, Alexandra Stan, David Deejay, Edward Maya, Akcent, entre otros.</p>
+    </div>
+</div>
+
+{% endblock %}

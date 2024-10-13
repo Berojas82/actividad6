@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post" class="buttons">
+    <h3>Por favor ingresa la sala de chat</h3>
+    <div>
+        <label>Nombre:</label> {{user.first_name}}
+    </div>
+    <div class="join">
+        <input type="text" placeholder="Ingresa un número de sala" name="cod" value="{{cod}}"/>
+        <button type="submit" name="unir">Únete a una sala</button>
+    </div>
+    <button type="submit" name="crear" class="create-btn">Crea una sala</button>
+    {% if error %}
+    <ul>
+        <li>{{error}}</li>
+    </ul>
+    {% endif %}
+</form>
+{% endblock %}
